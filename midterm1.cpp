@@ -187,7 +187,7 @@ public:
         delete temp;
     }
 
-    // This node will add a node to the end of the linked list.
+    // This function will add a node to the end of the doubly linked list.
     void push_back(int v) {
         // Create the new node with the inputted value.
         Node* newNode = new Node(v);
@@ -196,7 +196,7 @@ public:
             // If the list is empty, set both the head and tail to point to our new one and only node. (since it is the only node it is both the head and tail of our list.)
             head = tail = newNode;
         else {
-            // If the list already has items, set the old tail's next to point to our new node.
+            // If the list already has nodes, set the old tail's next to point to our new node.
             tail->next = newNode;
             // Set our new node's prev to point to the old tail of the list.
             newNode->prev = tail;
@@ -205,13 +205,20 @@ public:
         }
     }
     
+    // This function will add a node to the front of the doubly linked list.
     void push_front(int v) {
+        // Create the new node with the inputted value.
         Node* newNode = new Node(v);
+        // If there is no head, the list is empty.
         if (!head)
+            // If the list is empty, set both the head and tail to point to our new one and only node. (since it is the only node, it is both the head and tail of our list.)
             head = tail = newNode;
         else {
+            // If the list already had nodes, set the new node's next pointer to point to the current head.
             newNode->next = head;
+            // Set the old head's prev to point to our new head.
             head->prev = newNode;
+            // Set the head to point to our new head, newnode.
             head = newNode;
         }
     }
