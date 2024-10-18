@@ -127,40 +127,63 @@ public:
         delete temp;
     }
 
+    // This function will delete the node at the specified index.
     void delete_pos(int pos) {
+        // If the head is null, the list is empty and there are no items to delete.
         if (!head) {
+            // Notify the user that the list is empty and that we cannot delete any items.
             cout << "List is empty." << endl;
+            // Exit the function.
             return;
         }
     
+        // If the position is 1, we are removing the first item in the list so call pop_front() which deletes the first item in the list.
         if (pos == 1) {
+            // Call pop front to delete the first item in the list.
             pop_front();
+            // Exit the function as we have deleted the node.
             return;
         }
     
+        // Create a pointer variable to point to the head, this will be our traveral variable to iterate over the list.
         Node* temp = head;
     
+        // Iterate over the list until we have reached the inputted position.
         for (int i = 1; i < pos; i++){
+            // If temp is null, we passed the end of the list and thus the positon was out of bounds.
             if (!temp) {
+                // Notify the user that the positon was out of bounds.
                 cout << "Position doesn't exist." << endl;
+                // Exit the function because of the error.
                 return;
             }
             else
+                // If temp is not null, we can continue iterating through the list by setting our traversal to the next node.
                 temp = temp->next;
         }
+        // If temp is null, we again passed the end of the list and thus the position was out of bounds.
         if (!temp) {
+            // Again notify the user that the positon is out of bounds.
             cout << "Position doesn't exist." << endl;
+            // Exit the function because of the error.
             return;
         }
     
+        // If temp does not have next node, it is the tail so we can simply call pop_back to remove the last item from the list.
         if (!temp->next) {
+            // Call pop back to remvoe the last item from the list.
             pop_back();
+            // Exit the function as we have successfully deleted the node.
             return;
         }
     
+        // Create a pointer variable to temporarily hold the previous node of the one to delete.
         Node* tempPrev = temp->prev;
+        // Set the next node of the previous node to point to the node after the one we are deleting.
         tempPrev->next = temp->next;
+        // Set the prev of the node after the one we are deleting to point to the previous node to the one we are deleting.
         temp->next->prev = tempPrev;
+        // Delete the node we are deleting to free space on the heap.
         delete temp;
     }
 
