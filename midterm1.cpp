@@ -318,16 +318,26 @@ public:
         cout << endl;
     }
 
+    // This function will print the doubly linked list to the console in reverse order.
     void print_reverse() {
+        // Begin our traversal at the tail of the list.
         Node* current = tail;
+
+        // If the tail is null, the list is empty and we have nothing to print.
         if (!current) { 
+            // Notify the user that the list is empty.
             cout << "List is empty." << endl;
+            // Exit the function as we have finished.
             return;
         }
+        // Iterate over the list unil we reach a null pointer signifying we reached the start.
         while (current) {
+            // Print the value of the current node to the console.
             cout << current->data << " ";
+            // Set our iterator to the previous item in the list.
             current = current->prev;
         }
+        // Add a newline to the console when we are done.
         cout << endl;
     }
 };
