@@ -1,7 +1,12 @@
+// COMSC 210 | Midterm 1 | Niko Dittmar
 #include <iostream>
 using namespace std;
 
-// Declare constants, 
+// Declare constants:
+// MIN_NR, minimum value for random node value.
+// MAX_NR, maximum value for random node value.
+// MIM_LS, minimum size for random list size.
+// MAX_LS, maximum size for random list size.
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
 // Doubly Linked List class to encapsulate the data structure.
@@ -223,21 +228,31 @@ public:
         }
     }
     
+    // This function will remove the first item from the doubly linked list.
     void pop_front() {
 
+        // If there is no head, the list is empty and there is nothing to delete.
         if (!head) {
+            // Notify the user that there is nothing to delete as the list is empty.
             cout << "List is empty." << endl;
+            // Exit the function due the the error.
             return;
         }
 
+        // Store the pointer to the head in temp.
         Node * temp = head;
 
+        // If there is a node after head, it is not the only item in the list.
         if (head->next) {
+            // Set the new head to the node after the one we will delete.
             head = head->next;
+            // Set the new head's prev to a null pointer as there is no node before it.
             head->prev = nullptr;
         }
         else
+            // If the head is the only item in the list, set both the head and tail to a null pointer.
             head = tail = nullptr;
+        // Delete the front node to free space on the heap.
         delete temp;
     }
 
