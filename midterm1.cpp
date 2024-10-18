@@ -35,35 +35,58 @@ public:
     // Default constructor, set the head and tail pointers to null.
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
-    // This function
+    // This function adds a new node after a specific index.
     void insert_after(int value, int position) {
+        // Ensure that the position is not below 0, an index below 0 is invalid.
         if (position < 0) {
+            // Notify the user that the position is invalid.
             cout << "Position must be >= 0." << endl;
+            // Exit the function.
             return;
         }
 
+        // Initialize the new node.
         Node* newNode = new Node(value);
+
+        // If the head is null, the list is empty.
         if (!head) {
+            // Because the list was previously empty, the new node is both the head and tail of the list.
+            // Set the head and tail to point to this new node.
             head = tail = newNode;
+            // Exit the function because we have added the node.
             return;
         }
 
+        // Create a pointer variable to point to the current node for our traversal.
         Node* temp = head;
+        // Iterate until we reach the index passed into the function.
         for (int i = 0; i < position && temp; ++i)
+            // Set our pointer to point to the next node to traverse the list.
             temp = temp->next;
 
+        // If temp is null, we passed the tail node and thus our postion was out of bounds.
         if (!temp) {
+            // Notify the user that the postion was invalid and that we were unable to insert the node.
             cout << "Position exceeds list size. Node not inserted.\n";
+            // Delete the node to prevent a memory leak.
             delete newNode;
+            // Exit the function due to error.
             return;
         }
 
+        // If this point is reached, we have found the node at position that we would like to insert another node after.
+        // Since we are inserting between temp and the node after temp, the node after temp is the next node for our new node.
         newNode->next = temp->next;
+        // Since we are inserting after temp, temp is the previous node. Set the prev pointer to point to temp.
         newNode->prev = temp;
+        // If the temp has a next (i.e. it is not the tail node), set the node after it to point to the new node we created.
         if (temp->next)
+            // Set the pointer to the next node to point to the newnode as we have inserted the node between temp and the node after it.
             temp->next->prev = newNode;
         else
+            // If temp->next is null, we are at the tail so set the tail to point to our new node as it is now the new tail.
             tail = newNode;
+        // Since we are inserting after temp, the next node after temp is now newnode.
         temp->next = newNode;
     }
 
