@@ -68,7 +68,7 @@ public:
         if (!temp) {
             // Notify the user that the postion was invalid and that we were unable to insert the node.
             cout << "Position exceeds list size. Node not inserted.\n";
-            // Delete the node to prevent a memory leak.
+            // Delete the node to free up space on the heap.
             delete newNode;
             // Exit the function due to error.
             return;
@@ -90,26 +90,40 @@ public:
         temp->next = newNode;
     }
 
+    // This function deletes a node that matches the inputted value, if two nodes have the same value, the first one in the list is deleted.
     void delete_val(int value) {
+        // If the head is null, the list is empty and there are no items to delete so return to exit the function.
         if (!head) return;
 
+        // Create pointer to node called temp to store our traversal through the linked list.
         Node* temp = head;
         
+        // Traverse through the list until we either reach the end or find the node that matches the inputted value.
         while (temp && temp->data != value)
+            // Traverse the list by moving to the next node each iteration of the loop.
             temp = temp->next;
 
+        // If temp is null, the loop above exited due to reaching the end of the list without finding the value.
+        // Since the value was not found, we have nothing to delete so exit the list.
         if (!temp) return; 
 
+        // If the value to delete has a prev, (i.e. it is not the head), set the previous node's next to point to the node after the one to delete.
         if (temp->prev)
+            // Set the previous node's next to the next node on the node we are deleting.
             temp->prev->next = temp->next;
         else
+            // If there is no prev, the node is the head so set the head to point to the new head which is the node after the one we are deleting.
             head = temp->next; 
 
+        // If the value to delete has a next, (i.e. it is not the tail), set the next node's prev to point to the node before the one to delete.
         if (temp->next)
+            // Set the next node's prev to point to the node before the one we are deleting.
             temp->next->prev = temp->prev;
         else
+            // If there is no next, the node is the tail so set the tail to point ot the new tail which is the node before the one we are deleting.
             tail = temp->prev; 
 
+        // Delete the node to free up space on the heap.
         delete temp;
     }
 
