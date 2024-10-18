@@ -340,11 +340,34 @@ public:
         // Add a newline to the console when we are done.
         cout << endl;
     }
+
+    void every_other_element() {
+        Node* current = head;
+        bool print = true;
+
+        if (!current) {
+            cout << "The List is empty, nothing to print!" << endl;
+            return;
+        }
+
+        while (current) {
+            if (print) {
+                cout << current->data << " ";
+            }
+            current = current->next;
+            print = !print;
+        }
+
+        cout << endl;
+    }
 };
 
+// The main function will be called at the start of our program.
 int main() {
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
 
-    
+    int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
+
+    // Return 0 to signify success.
     return 0;
 }
