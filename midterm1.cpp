@@ -228,7 +228,7 @@ public:
         }
     }
     
-    // This function will remove the first item from the doubly linked list.
+    // This function will remove the first node from the doubly linked list.
     void pop_front() {
 
         // If there is no head, the list is empty and there is nothing to delete.
@@ -256,19 +256,30 @@ public:
         delete temp;
     }
 
+    // This function will remove the last node from the doubly linked list.
     void pop_back() {
+        // If there is no tail, the list is empty and there is nothing to delete.
         if (!tail) {
+            // Notify the user that there is nothing to delete as the list is empty.
             cout << "List is empty." << endl;
+            // Exit the function due the the error.
             return;
         }
+
+        // Store the pointer to the tail in temp.
         Node * temp = tail;
 
+        // If there is a node before the tail, it is not the only item in the list.
         if (tail->prev) {
+            // Set the new tail to the node before the one we will delete.
             tail = tail->prev;
+            // Set the new tail's next to a null pointer as there is no node after it.
             tail->next = nullptr;
         }
         else
+            // If the tail is the only item in the list, set both the head and tail to a null pointer.
             head = tail = nullptr;
+        // Delete the tail node to free space on the heap.
         delete temp;
     }
 
