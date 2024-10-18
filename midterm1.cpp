@@ -187,13 +187,20 @@ public:
         delete temp;
     }
 
+    // This node will add a node to the end of the linked list.
     void push_back(int v) {
+        // Create the new node with the inputted value.
         Node* newNode = new Node(v);
+        // If there is no tail, the list is empty.
         if (!tail)
+            // If the list is empty, set both the head and tail to point to our new one and only node. (since it is the only node it is both the head and tail of our list.)
             head = tail = newNode;
         else {
+            // If the list already has items, set the old tail's next to point to our new node.
             tail->next = newNode;
+            // Set our new node's prev to point to the old tail of the list.
             newNode->prev = tail;
+            // Set the tail pointer to point to the new tail (the node we added to the back of the list)
             tail = newNode;
         }
     }
