@@ -341,32 +341,61 @@ public:
         cout << endl;
     }
 
+    // This function will output every other item in our list.
     void every_other_element() {
+        // Begin our traversal at the head of the list.
         Node* current = head;
+        // This variable will flip flop on each item on the list to signify if we should print or not.
         bool print = true;
 
+        // If the head is null, the list is empty and we have nothing to print.
         if (!current) {
+            // Notify the user that the list is empty.
             cout << "The List is empty, nothing to print!" << endl;
+            // Exit the function as we have finished.
             return;
         }
 
+        // Iterate over the list unil we reach a null pointer signifying we reached the end.
         while (current) {
+            // If print is true, we are printing this node.
             if (print) {
+                // Print the value of the current node to the console.
                 cout << current->data << " ";
             }
+            // Set our iterator to the next item in the list.
             current = current->next;
+            // Set print to the opposite of itself to either not print it after printing it or print it after not printing it.
             print = !print;
         }
 
+        // Add a newline to the console when we are done.
         cout << endl;
     }
 };
 
 // The main function will be called at the start of our program.
 int main() {
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
+    // Create our doubly linked list.
+    DoublyLinkedList list;
 
+    // Test every other element with an empty list.
+    list.every_other_element();
+
+    // Set the size to a random value.
     int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
+
+    // Add values to reach our random size.
+    for (int i = 0; i < size; ++i) {
+        // Add a random value to the list within our specified bounds.
+        list.push_back(rand() % (MAX_NR-MIN_NR + 1) + MIN_NR);
+    }
+
+    // Print our list to show all of the items.
+    list.print();
+
+    // Print every other item in the list.
+    list.every_other_element();
 
     // Return 0 to signify success.
     return 0;
