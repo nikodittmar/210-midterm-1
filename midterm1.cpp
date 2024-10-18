@@ -283,13 +283,19 @@ public:
         delete temp;
     }
 
+    // This destructor will specify how to delete the linked list.
     ~DoublyLinkedList() {
+        // To delete the linked list, we will traverse the list, deleting each node as we go. We start at the head.
         while (head) {
+            // Keep a pointer to the old head.
             Node* temp = head;
+            // We are using head as our traversal variable, we set it to next to traverse the doubly linked list on each iteration.
             head = head->next;
+            // Delete the old head to free space on the heap.
             delete temp;
         }
     }
+    
     void print() {
         Node* current = head;
         if (!current) {
