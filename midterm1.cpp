@@ -295,17 +295,26 @@ public:
             delete temp;
         }
     }
-    
+
+    // This function will print the doubly linked list to the console in forward order.
     void print() {
+        // Begin our traversal at the head of the list.
         Node* current = head;
+        // If the head is null, the list is empty and we have nothing to print.
         if (!current) {
+            // Notify the user that the list is empty.
             cout << "List is empty." << endl;
+            // Exit the function as we have finished.
             return;
         }
+        // Iterate over the list unil we reach a null pointer signifying we reached the end.
         while (current) {
+            // Print the value of the current node to the console.
             cout << current->data << " ";
+            // Set our iterator to the next item in the list.
             current = current->next;
         }
+        // Add a newline to the console when we are done.
         cout << endl;
     }
 
